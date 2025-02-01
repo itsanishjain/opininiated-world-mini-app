@@ -2,9 +2,11 @@
 import { signIn, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const SignIn = () => {
   const { status } = useSession();
+  const router = useRouter();
 
   const handleSignIn = () => {
     signIn("worldcoin", {
@@ -18,11 +20,11 @@ export const SignIn = () => {
   }
 
   if (status === "authenticated") {
-    return redirect("/home");
+    router.push("/home");
   }
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="min-h-screen flex flex-col items-center justify-center gap-2">
       <Button onClick={handleSignIn}>Sign in with Worldcoin</Button>
     </div>
   );
