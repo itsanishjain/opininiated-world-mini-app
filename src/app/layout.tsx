@@ -36,7 +36,6 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               <MiniKitProvider>{children}</MiniKitProvider>
-              <BottomNav />
             </ThemeProvider>
           </ErudaProvider>
         </NextAuthProvider>

@@ -55,7 +55,6 @@ export const VerifyBlock = () => {
       }),
     });
 
-    // TODO: Handle Success!
     const verifyResponseJson = await verifyResponse.json();
 
     if (verifyResponseJson.status === 200) {
