@@ -9,8 +9,8 @@ import { BottomNav } from "@/components/bottom-nav";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "GoRide - Driving Instructor App",
-  description: "Connect with qualified driving instructors",
+  title: "Mini App Starter",
+  description: "A starter template for building mini apps with Next.js",
 };
 
 export default function RootLayout({
