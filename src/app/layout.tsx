@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { bricolage } from "@/lib/fonts";
 import "./globals.css";
 import MiniKitProvider from "@/components/minikit-provider";
 import dynamic from "next/dynamic";
 import NextAuthProvider from "@/components/next-auth-provider";
 import { ThemeProvider } from "@/components/theme-provider";
-import { BottomNav } from "@/components/bottom-nav";
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Mini App Starter",
@@ -26,7 +24,7 @@ export default function RootLayout({
   );
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={bricolage.className}>
         <NextAuthProvider>
           <ErudaProvider>
             <ThemeProvider

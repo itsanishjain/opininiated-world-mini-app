@@ -1,9 +1,7 @@
-import { VerifyBlock } from "@/components/Verify";
-
 export default function Home() {
   return (
-    <div>
-      <VerifyBlock />
+    <div className="flex justify-center items-center min-h-screen">
+      <h1 className="text-4xl font-bold">Home</h1>
     </div>
   );
 }
