@@ -19,8 +19,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  console.log(request.cookies);
-
   // Get the token from the cookies
   const token =
     request.cookies.get("next-auth.session-token")?.value ||
