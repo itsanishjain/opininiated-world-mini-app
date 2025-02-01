@@ -6,22 +6,33 @@ export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   // Define public paths that don't require authentication
-  const isPublicPath = path === "/";
+  const publicPaths = ["/"];
+  const isPublicPath = publicPaths.includes(path);
+
+  // Define paths that should be ignored by middleware
+  const ignorePaths = ["/api/auth", "/_next", "/favicon.ico"];
+  const shouldIgnore = ignorePaths.some((ignorePath) =>
+    path.startsWith(ignorePath)
+  );
+
+  if (shouldIgnore) {
+    return NextResponse.next();
+  }
 
   console.log(request.cookies);
 
   // Get the token from the cookies
   const token =
-    request.cookies.get("__Secure-next-auth.session-token")?.value || "";
+    request.cookies.get("next-auth.session-token")?.value ||
+    request.cookies.get("__Secure-next-auth.session-token")?.value;
 
-  // Redirect logic
+  // If the user is on a public path and has a token, redirect to profile
   if (isPublicPath && token) {
-    // If user is authenticated and tries to access public path, redirect to home
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/home", request.url));
   }
 
+  // If the user is not on a public path and doesn't have a token, redirect to signin
   if (!isPublicPath && !token) {
-    // If user is not authenticated and tries to access protected path, redirect to login
     return NextResponse.redirect(new URL("/", request.url));
   }
 
@@ -38,6 +49,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    "/((?!api/auth|_next/static|_next/image|favicon.ico).*)",
   ],
 };
