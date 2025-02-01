@@ -127,7 +127,10 @@ export default function Profile() {
                   <div>
                     <p className="text-sm text-gray-500">Status</p>
                     <p className="font-semibold">
-                      {session.user?.email ? "Verified" : "Not Verified"}
+                      {
+                        (session.user as { verificationLevel?: string })
+                          ?.verificationLevel
+                      }
                     </p>
                   </div>
                 </div>
